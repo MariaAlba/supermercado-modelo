@@ -331,7 +331,6 @@ public class ProductoDAO implements IProductoDAO {
 			pst.setInt(6, pojo.getCategoria().getId());
 			pst.setInt(7, pojo.getUsuario().getId());
 
-			LOG.error("falla aki" + pst);
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				// conseguimos el ID que acabamos de crear
