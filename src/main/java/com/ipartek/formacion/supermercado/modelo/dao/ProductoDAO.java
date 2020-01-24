@@ -31,6 +31,7 @@ public class ProductoDAO implements IProductoDAO {
 			+ "			c.nombre as'nombre_categoria', u.nombre as 'nombre_usuario' \r\n"
 			+ "			FROM producto p, usuario u, categoria c WHERE p.id_usuario=u.id AND p.id_categoria=c.id\r\n"
 			+ "			ORDER BY p.id ASC LIMIT 500;";
+
 	private static final String SQL_GET_ALL_BY_USER = "SELECT p.id 'id_producto'," + "p.nombre'nombre_producto',"
 			+ "p.descripcion'descripcion_producto',p.precio'precio_producto',p.imagen'imagen_producto',"
 			+ "p.descuento'descuento_precio',p.id_categoria 'id_categoria', " + "p.fecha_alta'fechaAlta',"
@@ -377,5 +378,38 @@ public class ProductoDAO implements IProductoDAO {
 		p.setUsuario(u);
 
 		return p;
+	}
+
+	public ArrayList<Producto> getAllOrderBy(String forma, String columna) {
+		ArrayList<Producto> lista = new ArrayList<Producto>();
+
+		String SQL_GET_ALL_ORDERED = "SELECT p.id as 'id_producto',  p.nombre as 'nombre_producto',\r\n"
+				+ "			p.descripcion as 'descripcion_producto',p.precio as 'precio_producto',\r\n"
+				+ "			p.imagen as 'imagen_producto',p.descuento as 'descuento_precio',p.id_categoria 'id_categoria',\r\n"
+				+ "			p.id_usuario 'id_usuario',p.fecha_alta as 'fechaAlta',\r\n"
+				+ "			p.fecha_modificacion as 'fechaModificada',p.fecha_baja as 'fechaBaja',\r\n"
+				+ "			c.nombre as'nombre_categoria', u.nombre as 'nombre_usuario' \r\n"
+				+ "			FROM producto p, usuario u, categoria c WHERE p.id_usuario=u.id AND p.id_categoria=c.id\r\n"
+				+ "			ORDER BY p." + columna + " " + forma + " LIMIT 500;";
+		;
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_GET_ALL_ORDERED);) {
+
+//			pst.setString(1, columna);
+//			pst.setString(2, forma);
+			LOG.debug(pst);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					lista.add(mapper(rs));
+				}
+			} // executeQuery
+
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+
+		return lista;
 	}
 }
