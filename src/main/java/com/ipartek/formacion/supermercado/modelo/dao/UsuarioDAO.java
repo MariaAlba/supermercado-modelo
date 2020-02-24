@@ -104,6 +104,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 		} catch (SQLException e) {
 			LOG.error(e);
+		} catch (Exception e) {
 		}
 
 		return registro;

@@ -147,6 +147,7 @@ public class CategoriaDAO implements ICategoriaDAO {
 			// una vez ejecutado, podemos recuperar el parametro de salida 2º ?
 			pojo.setId(cs.getInt(2));
 
+		} catch (Exception e) {
 		}
 
 		return registro;

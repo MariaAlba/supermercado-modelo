@@ -1,30 +1,25 @@
 package com.ipartek.formacion.supermercado.modelo.pojo;
 
 public class Alerta {
-	
-	
-	//TODO resto de tipos: success, warning,...
+
+	// TODO resto de tipos: success, warning,...
 	public static final String TIPO_PRIMARY = "primary";
 	public static final String TIPO_DANGER = "danger";
-	
+
 	private String texto;
 	private String tipo;
-	
+
 	public Alerta() {
 		super();
 		this.texto = "ERROR inexperado de la aplicación";
 		this.tipo = TIPO_DANGER;
 	}
-	
-	
 
 	public Alerta(String tipo, String texto) {
-		super();
+		this();
 		this.tipo = tipo;
-		this.texto = texto;		
+		this.texto = texto;
 	}
-
-
 
 	public String getTexto() {
 		return texto;
@@ -46,6 +41,5 @@ public class Alerta {
 	public String toString() {
 		return "Alerta [texto=" + texto + ", tipo=" + tipo + "]";
 	}
-	
 
 }
