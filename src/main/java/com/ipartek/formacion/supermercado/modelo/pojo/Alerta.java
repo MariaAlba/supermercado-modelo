@@ -2,7 +2,6 @@ package com.ipartek.formacion.supermercado.modelo.pojo;
 
 public class Alerta {
 
-	// TODO resto de tipos: success, warning,...
 	public static final String TIPO_PRIMARY = "primary";
 	public static final String TIPO_DANGER = "danger";
 
